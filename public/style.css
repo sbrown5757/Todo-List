@@ -29,6 +29,7 @@ form div {
   transition: 0.3s;
   color: white;
   border: none;
+  padding: 4px;
 }
 
 .todo-box:hover {

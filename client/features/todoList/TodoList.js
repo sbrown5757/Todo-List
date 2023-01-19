@@ -50,7 +50,7 @@ const Todos = () => {
             </Box>
             <Box
               className="delete"
-              sx={{ display: "none", padding: "15px", transition: ".3s" }}
+              sx={{ display: "none", paddingRight: "15px", transition: ".3s" }}
             >
               <DeleteForeverIcon className="delete-icon" />
             </Box>

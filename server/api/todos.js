@@ -10,6 +10,7 @@ router.get(`/:id`, async (req, res, next) => {
       where: {
         userId: req.params.id,
       },
+      order: [["id", "ASC"]],
     });
     res.json(todos);
   } catch (err) {

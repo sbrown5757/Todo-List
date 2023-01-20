@@ -133,13 +133,6 @@ const Todos = () => {
             >
               Save
             </Button>
-            {/* <CancelRoundedIcon
-              sx={{ cursor: "pointer", color: "#da3633" }}
-              onClick={() => {
-                setError(null);
-                setOpen(false);
-              }}
-            ></CancelRoundedIcon> */}
             <Button
               variant="outlined"
               sx={{

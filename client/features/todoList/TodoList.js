@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTodos } from "./todoSlice";
-import { createTodo } from "./todoSlice";
+import { deleteTodo, fetchTodos, createTodo } from "./todoSlice";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
@@ -35,6 +34,11 @@ const Todos = () => {
       setError(null);
       await dispatch(fetchTodos(id));
     }
+  };
+
+  const handleDelete = async (todoId) => {
+    await dispatch(deleteTodo({ todoId }));
+    await dispatch(fetchTodos(id));
   };
 
   return (
@@ -145,6 +149,9 @@ const Todos = () => {
                 display: "none",
                 paddingRight: "15px",
                 transition: ".3s",
+              }}
+              onClick={() => {
+                handleDelete(todo.id);
               }}
             >
               <DeleteForeverIcon className="delete-icon" />

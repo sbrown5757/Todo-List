@@ -15,10 +15,26 @@ export const fetchTodos = createAsyncThunk("/user/todos", async (id) => {
   }
 });
 
+export const createTodo = createAsyncThunk(
+  "/user/createTodo",
+  async ({ id, desc }) => {
+    const token = localStorage.getItem("token");
+    try {
+      if (token) {
+        const res = await axios.post(`/api/users/${id}/todos`, { desc });
+        return res.data;
+      }
+    } catch (err) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const todosSlice = createSlice({
   name: "todos",
   initialState: {
     todos: [],
+    latestTodo: {},
     error: null,
   },
   extraReducers: (builder) => {
@@ -26,6 +42,12 @@ export const todosSlice = createSlice({
       state.todos = action.payload;
     });
     builder.addCase(fetchTodos.rejected, (state, action) => {
+      state.error = action.error;
+    });
+    builder.addCase(createTodo.fulfilled, (state, action) => {
+      state.latestTodo = action.payload;
+    });
+    builder.addCase(createTodo.rejected, (state, action) => {
       state.error = action.error;
     });
   },

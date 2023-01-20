@@ -11,7 +11,11 @@ const Home = (props) => {
   return (
     <Container
       maxWidth="md"
-      sx={{ backgroundColor: "#30363d", borderRadius: "8px" }}
+      sx={{
+        backgroundColor: "#30363d",
+        borderRadius: "8px",
+        boxShadow: "0px 12px 12px 12px rgba(0,0,0, 0.8)",
+      }}
     >
       <Box
         sx={{
@@ -19,7 +23,7 @@ const Home = (props) => {
           justifyContent: "center",
         }}
       >
-        <h1 className="header">Todo List</h1>
+        <h1 className="header">Tasks</h1>
       </Box>
       <Box
         sx={{

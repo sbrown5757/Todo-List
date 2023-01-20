@@ -30,3 +30,15 @@ router.get(`/:id/todos`, async (req, res, next) => {
     next(err);
   }
 });
+
+router.post(`/:id/todos`, async (req, res, next) => {
+  try {
+    const { desc } = req.body;
+    const userId = req.params.id;
+    const completed = false;
+    const todos = await Todo.create({ desc, completed, userId });
+    res.json(todos);
+  } catch (err) {
+    next(err);
+  }
+});

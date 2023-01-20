@@ -22,6 +22,10 @@ form div {
   display: inline-block;
 }
 
+.error-text {
+  color: #da3633;
+}
+
 .header {
   color: white;
 }

@@ -11,12 +11,15 @@ import AddIcon from "@mui/icons-material/Add";
 import Fab from "@mui/material/Fab";
 import FocusTrap from "@mui/base/FocusTrap";
 import { InputBase } from "@mui/material";
+import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
+
 const Todos = () => {
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todoList.todos);
   const id = useSelector((state) => state.auth.me.id);
   const [open, setOpen] = useState(false);
   const [newTask, setNewTask] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     dispatch(fetchTodos(id));
@@ -24,8 +27,14 @@ const Todos = () => {
 
   const handleSubmit = async () => {
     const desc = newTask;
-    await dispatch(createTodo({ id, desc }));
-    await dispatch(fetchTodos(id));
+    if (desc === "" || !!!desc) {
+      setError("Input cannot be empty");
+    } else {
+      await dispatch(createTodo({ id, desc }));
+      setOpen(false);
+      setError(null);
+      await dispatch(fetchTodos(id));
+    }
   };
 
   return (
@@ -64,6 +73,7 @@ const Todos = () => {
           >
             <InputBase
               placeholder="Task"
+              required
               variant="outlined"
               sx={{
                 width: "100%",
@@ -75,6 +85,11 @@ const Todos = () => {
               }}
               onChange={(evt) => setNewTask(evt.target.value)}
             />
+            {error && (
+              <Box>
+                <p className="error-text">{error}</p>
+              </Box>
+            )}
             <Button
               sx={{
                 width: "150px",
@@ -86,11 +101,17 @@ const Todos = () => {
               variant="contained"
               onClick={() => {
                 handleSubmit();
-                setOpen(false);
               }}
             >
               Save
             </Button>
+            <CancelRoundedIcon
+              sx={{ cursor: "pointer", color: "#da3633" }}
+              onClick={() => {
+                setError(null);
+                setOpen(false);
+              }}
+            ></CancelRoundedIcon>
           </Box>
         </FocusTrap>
       )}
@@ -119,7 +140,12 @@ const Todos = () => {
             </Box>
             <Box
               className="delete"
-              sx={{ display: "none", paddingRight: "15px", transition: ".3s" }}
+              sx={{
+                color: "#da3633",
+                display: "none",
+                paddingRight: "15px",
+                transition: ".3s",
+              }}
             >
               <DeleteForeverIcon className="delete-icon" />
             </Box>

@@ -4,6 +4,7 @@ import { deleteTodo, fetchTodos, createTodo } from "./todoSlice";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
+import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
@@ -11,12 +12,14 @@ import Fab from "@mui/material/Fab";
 import FocusTrap from "@mui/base/FocusTrap";
 import { InputBase } from "@mui/material";
 import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
+import EditTodo from "./editTodo";
 
 const Todos = () => {
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todoList.todos);
   const id = useSelector((state) => state.auth.me.id);
   const [open, setOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState({ isOpen: false, todoId: null });
   const [newTask, setNewTask] = useState(null);
   const [error, setError] = useState(null);
 
@@ -141,20 +144,34 @@ const Todos = () => {
                 }}
               />
               <h4>{todo.desc}</h4>
+              <EditTodo todo={todo} />
             </Box>
-            <Box
-              className="delete"
-              sx={{
-                color: "#da3633",
-                display: "none",
-                paddingRight: "15px",
-                transition: ".3s",
-              }}
-              onClick={() => {
-                handleDelete(todo.id);
-              }}
-            >
-              <DeleteForeverIcon className="delete-icon" />
+            <Box sx={{ display: "flex" }}>
+              <Box
+                className="edit"
+                sx={{
+                  display: "none",
+                  paddingRight: "15px",
+                  transition: ".3s",
+                }}
+                onClick={() => {}}
+              >
+                <EditIcon className="edit-delete-icon" />
+              </Box>
+              <Box
+                className="delete"
+                sx={{
+                  color: "#da3633",
+                  display: "none",
+                  paddingRight: "15px",
+                  transition: ".3s",
+                }}
+                onClick={() => {
+                  handleDelete(todo.id);
+                }}
+              >
+                <DeleteForeverIcon className="edit-delete-icon" />
+              </Box>
             </Box>
           </Box>
         );

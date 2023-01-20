@@ -29,6 +29,17 @@ router.post(`/:id`, async (req, res, next) => {
   }
 });
 
+router.put(`/:id`, async (req, res, next) => {
+  try {
+    const { desc, completed } = req.body;
+    const todo = await Todo.findByPk(req.params.id);
+    const updatedTodo = await todo.update({ desc, completed });
+    res.json(updatedTodo);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.delete(`/:id`, async (req, res, next) => {
   try {
     const todo = await Todo.findByPk(req.params.id);

@@ -50,12 +50,16 @@ form div {
   display: block;
 }
 
-.delete-icon {
+.todo-box:hover .edit {
+  display: block;
+}
+
+.edit-delete-icon {
   transition: 0.3s;
   border-radius: 8px;
   padding: 4px;
 }
 
-.delete-icon:hover {
+.edit-delete-icon:hover {
   background-color: #30363d;
 }

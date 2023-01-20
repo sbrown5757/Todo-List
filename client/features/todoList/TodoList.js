@@ -133,13 +133,31 @@ const Todos = () => {
             >
               Save
             </Button>
-            <CancelRoundedIcon
+            {/* <CancelRoundedIcon
               sx={{ cursor: "pointer", color: "#da3633" }}
               onClick={() => {
                 setError(null);
                 setOpen(false);
               }}
-            ></CancelRoundedIcon>
+            ></CancelRoundedIcon> */}
+            <Button
+              variant="outlined"
+              sx={{
+                color: "#da3633",
+                borderColor: "#da3633",
+                ":hover": {
+                  backgroundColor: "#da3633",
+                  color: "#ffffff",
+                  borderColor: "#da3633",
+                },
+              }}
+              onClick={() => {
+                setError(null);
+                setOpen(false);
+              }}
+            >
+              Cancel
+            </Button>
           </Box>
         </FocusTrap>
       )}

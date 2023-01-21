@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCompleted } from "./todoSlice";
+import { fetchCompleted, updateTodo } from "./todoSlice";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
@@ -17,6 +17,12 @@ const Completed = () => {
 
   const handleDelete = async (todoId) => {
     await dispatch(deleteTodo({ todoId }));
+    await dispatch(fetchCompleted(id));
+  };
+
+  const handleResume = async (todoId) => {
+    const completed = false;
+    await dispatch(updateTodo({ todoId, completed }));
     await dispatch(fetchCompleted(id));
   };
 
@@ -49,6 +55,9 @@ const Completed = () => {
             >
               <Box sx={{ display: "flex" }}>
                 <Checkbox
+                  onClick={() => {
+                    handleResume(todo.id);
+                  }}
                   checked
                   sx={{
                     color: "#CB9CF2",

@@ -16,7 +16,6 @@ const Home = (props) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  console.log(value);
 
   return (
     <Container

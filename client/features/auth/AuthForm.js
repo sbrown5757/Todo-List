@@ -19,13 +19,42 @@ const AuthForm = ({ name, displayName }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
     const formName = evt.target.name;
-    const username = evt.target.username.value;
+    // const first_name = evt.target.firstName.value;
+    // const last_name = evt.target.lastName.value;
+
+    const email = evt.target.email.value;
     const password = evt.target.password.value;
-    dispatch(authenticate({ username, password, method: formName }));
-    navigate("/");
+
+    if (name === "signup") {
+      const first_name = evt.target.firstName.value;
+      const last_name = evt.target.lastName.value;
+      const res = await dispatch(
+        authenticate({
+          first_name,
+          last_name,
+          email,
+          password,
+          method: formName,
+        })
+      );
+
+      if (res.type === "auth/authenticate/fulfilled") {
+        navigate("/");
+      }
+    } else {
+      const res = await dispatch(
+        authenticate({ email, password, method: formName })
+      );
+      if (res.type === "auth/authenticate/fulfilled") {
+        navigate("/");
+      }
+    }
+
+    // dispatch(authenticate({ username, password, method: formName }));
+    // navigate("/");
   };
 
   return (
@@ -53,8 +82,9 @@ const AuthForm = ({ name, displayName }) => {
           <form onSubmit={handleSubmit} name={name}>
             <Box>
               <InputBase
-                placeholder="Username"
-                name="username"
+                placeholder="Email"
+                name="email"
+                type="email"
                 required
                 variant="outlined"
                 autoComplete="off"
@@ -63,7 +93,7 @@ const AuthForm = ({ name, displayName }) => {
                   border: "1px solid white",
                   borderRadius: "6px",
                   height: "6vh",
-                  padding: "4vh 2vh 4vh 2vh",
+                  padding: "2vh 1vh 2vh 1vh",
                   color: "#ffffff",
                 }}
               />
@@ -80,7 +110,7 @@ const AuthForm = ({ name, displayName }) => {
                   border: "1px solid white",
                   borderRadius: "6px",
                   height: "6vh",
-                  padding: "4vh 2vh 4vh 2vh",
+                  padding: "2vh 1vh 2vh 1vh",
                   color: "#ffffff",
                 }}
               />
@@ -116,11 +146,11 @@ const AuthForm = ({ name, displayName }) => {
           }}
         >
           <h2 className="header">Sign up</h2>
-          <form onSubmit={handleSubmit} name={name}>
+          <form className="signup-form" onSubmit={handleSubmit} name={name}>
             <Box>
               <InputBase
-                placeholder="Username"
-                name="username"
+                placeholder="First Name"
+                name="firstName"
                 required
                 variant="outlined"
                 autoComplete="off"
@@ -129,7 +159,41 @@ const AuthForm = ({ name, displayName }) => {
                   border: "1px solid white",
                   borderRadius: "6px",
                   height: "6vh",
-                  padding: "4vh 2vh 4vh 2vh",
+                  padding: "2vh 1vh 2vh 1vh",
+                  color: "#ffffff",
+                }}
+              />
+            </Box>
+            <Box>
+              <InputBase
+                placeholder="Last Name"
+                name="lastName"
+                required
+                variant="outlined"
+                type="text"
+                sx={{
+                  width: "100%",
+                  border: "1px solid white",
+                  borderRadius: "6px",
+                  height: "6vh",
+                  padding: "2vh 1vh 2vh 1vh",
+                  color: "#ffffff",
+                }}
+              />
+            </Box>
+            <Box>
+              <InputBase
+                placeholder="Email"
+                name="email"
+                required
+                variant="outlined"
+                type="email"
+                sx={{
+                  width: "100%",
+                  border: "1px solid white",
+                  borderRadius: "6px",
+                  height: "6vh",
+                  padding: "2vh 1vh 2vh 1vh",
                   color: "#ffffff",
                 }}
               />
@@ -146,24 +210,7 @@ const AuthForm = ({ name, displayName }) => {
                   border: "1px solid white",
                   borderRadius: "6px",
                   height: "6vh",
-                  padding: "4vh 2vh 4vh 2vh",
-                  color: "#ffffff",
-                }}
-              />
-            </Box>
-            <Box>
-              <InputBase
-                placeholder="Password"
-                name="password"
-                required
-                variant="outlined"
-                type="password"
-                sx={{
-                  width: "100%",
-                  border: "1px solid white",
-                  borderRadius: "6px",
-                  height: "6vh",
-                  padding: "4vh 2vh 4vh 2vh",
+                  padding: "2vh 1vh 2vh 1vh",
                   color: "#ffffff",
                 }}
               />

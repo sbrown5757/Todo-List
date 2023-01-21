@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Todos from "../todoList/TodoList";
+import Completed from "../todoList/CompletedList";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 
@@ -32,6 +33,7 @@ const Home = (props) => {
         centered
         TabIndicatorProps={{ sx: { backgroundColor: "#CB9CF2" } }}
         sx={{
+          marginBottom: "4vh",
           "& button": { color: "#ffffff" },
           "& button:hover": { color: "#CB9CF2" },
           "& button:active": { color: "#CB9CF2" },
@@ -43,22 +45,7 @@ const Home = (props) => {
         <Tab value="completed" label="Completed" />
         <Tab value="account" label="Account" />
       </Tabs>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <h1 className="header">Tasks</h1>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          gap: "20px",
-        }}
-      >
-        <Todos />
-      </Box>
+      {value === "completed" ? <Completed /> : <Todos />}
     </Container>
   );
 };

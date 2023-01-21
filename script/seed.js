@@ -29,6 +29,7 @@ async function seed() {
       completed: false,
     }),
     await Todo.create({ userId: 1, desc: "play with sam", completed: false }),
+    await Todo.create({ userId: 1, desc: "play with bean", completed: true }),
   ]);
 
   console.log(`seeded ${users.length} users`);

@@ -9,10 +9,26 @@ router.get(`/:id`, async (req, res, next) => {
     const todos = await Todo.findAll({
       where: {
         userId: req.params.id,
+        completed: false,
       },
       order: [["id", "ASC"]],
     });
     res.json(todos);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get(`/:id/completed`, async (req, res, next) => {
+  try {
+    const completed = await Todo.findAll({
+      where: {
+        userId: req.params.id,
+        completed: true,
+      },
+      order: [["id", "ASC"]],
+    });
+    res.json(completed);
   } catch (err) {
     next(err);
   }

@@ -15,6 +15,20 @@ export const fetchTodos = createAsyncThunk("/todos", async (id) => {
   }
 });
 
+export const fetchCompleted = createAsyncThunk("/completed", async (id) => {
+  const token = localStorage.getItem("token");
+  try {
+    if (token) {
+      const res = await axios.get(`/api/todos/${id}/completed`);
+      return res.data;
+    } else {
+      return [];
+    }
+  } catch (err) {
+    return thunkAPI.rejectWithValue(error.response.data);
+  }
+});
+
 export const createTodo = createAsyncThunk(
   "/todo/create",
   async ({ id, desc }) => {
@@ -95,6 +109,12 @@ export const todosSlice = createSlice({
       state.latestTodo = action.payload;
     });
     builder.addCase(updateTodo.rejected, (state, action) => {
+      state.error = action.error;
+    });
+    builder.addCase(fetchCompleted.fulfilled, (state, action) => {
+      state.todos = action.payload;
+    });
+    builder.addCase(fetchCompleted.rejected, (state, action) => {
       state.error = action.error;
     });
   },

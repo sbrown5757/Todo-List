@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCompleted, updateTodo } from "./todoSlice";
+import { fetchCompleted, updateTodo, deleteTodo } from "./todoSlice";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
@@ -94,7 +94,9 @@ const Completed = () => {
           );
         })
       ) : (
-        <h2 style={{ color: "#ffffff" }}>No tasks</h2>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <h2 style={{ color: "#ffffff" }}>No tasks</h2>
+        </Box>
       )}
     </Container>
   );

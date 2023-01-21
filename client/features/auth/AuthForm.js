@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { authenticate } from "../../app/store";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import { InputBase } from "@mui/material";
@@ -40,7 +41,7 @@ const AuthForm = ({ name, displayName }) => {
         boxShadow: "0px 12px 12px 12px rgba(0, 0, 0, 0.2)",
       }}
     >
-      {displayName === "login" ? (
+      {name === "login" ? (
         <Box
           sx={{
             display: "flex",
@@ -48,7 +49,7 @@ const AuthForm = ({ name, displayName }) => {
             alignItems: "center",
           }}
         >
-          <h1 className="header">Log in</h1>
+          <h2 className="header">Log in</h2>
           <form onSubmit={handleSubmit} name={name}>
             <Box>
               <InputBase
@@ -101,6 +102,10 @@ const AuthForm = ({ name, displayName }) => {
             </Box>
             {error && <div> {error} </div>}
           </form>
+          <h4>Don't have an account?</h4>
+          <Link className="link" to="/signup">
+            Sign up
+          </Link>
         </Box>
       ) : (
         <Box
@@ -110,7 +115,7 @@ const AuthForm = ({ name, displayName }) => {
             alignItems: "center",
           }}
         >
-          <h1 className="header">Sign up</h1>
+          <h2 className="header">Sign up</h2>
           <form onSubmit={handleSubmit} name={name}>
             <Box>
               <InputBase
@@ -119,6 +124,23 @@ const AuthForm = ({ name, displayName }) => {
                 required
                 variant="outlined"
                 autoComplete="off"
+                sx={{
+                  width: "100%",
+                  border: "1px solid white",
+                  borderRadius: "6px",
+                  height: "6vh",
+                  padding: "4vh 2vh 4vh 2vh",
+                  color: "#ffffff",
+                }}
+              />
+            </Box>
+            <Box>
+              <InputBase
+                placeholder="Password"
+                name="password"
+                required
+                variant="outlined"
+                type="password"
                 sx={{
                   width: "100%",
                   border: "1px solid white",
@@ -163,6 +185,10 @@ const AuthForm = ({ name, displayName }) => {
             </Box>
             {error && <div> {error} </div>}
           </form>
+          <h4>Or</h4>
+          <Link className="link" to="/login">
+            Login
+          </Link>
         </Box>
       )}
     </Container>

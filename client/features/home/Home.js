@@ -25,6 +25,7 @@ const Home = (props) => {
         backgroundColor: "#30363d",
         borderRadius: "8px",
         boxShadow: "0px 12px 12px 12px rgba(0,0,0, 0.8)",
+        marginTop: "20vh",
       }}
     >
       <Tabs

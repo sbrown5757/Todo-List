@@ -2,6 +2,7 @@
 body {
   font-family: sans-serif;
   background-color: #161b22;
+  color: #ffffff;
 }
 
 a {
@@ -64,4 +65,13 @@ form {
 
 .edit-delete-icon:hover {
   background-color: #30363d;
+}
+
+.link {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.link:hover {
+  text-decoration: none;
 }

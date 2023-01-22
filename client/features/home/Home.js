@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Todos from "../todoList/TodoList";
 import Completed from "../todoList/CompletedList";
+import Account from "../account/Account";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 
@@ -24,7 +25,7 @@ const Home = (props) => {
         backgroundColor: "#30363d",
         borderRadius: "8px",
         boxShadow: "0px 12px 12px 12px rgba(0,0,0, 0.8)",
-        marginTop: "20vh",
+        marginTop: "10vh",
       }}
     >
       <Tabs
@@ -45,7 +46,13 @@ const Home = (props) => {
         <Tab value="completed" label="Completed" />
         <Tab value="account" label="Account" />
       </Tabs>
-      {value === "completed" ? <Completed /> : <Todos />}
+      {value === "completed" ? (
+        <Completed />
+      ) : value === "account" ? (
+        <Account />
+      ) : (
+        <Todos />
+      )}
     </Container>
   );
 };

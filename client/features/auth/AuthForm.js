@@ -22,8 +22,6 @@ const AuthForm = ({ name, displayName }) => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     const formName = evt.target.name;
-    // const first_name = evt.target.firstName.value;
-    // const last_name = evt.target.lastName.value;
 
     const email = evt.target.email.value;
     const password = evt.target.password.value;
@@ -52,9 +50,6 @@ const AuthForm = ({ name, displayName }) => {
         navigate("/");
       }
     }
-
-    // dispatch(authenticate({ username, password, method: formName }));
-    // navigate("/");
   };
 
   return (
@@ -63,7 +58,7 @@ const AuthForm = ({ name, displayName }) => {
       sx={{
         display: "flex",
         justifyContent: "center",
-        marginTop: "20vh",
+        marginTop: "15vh",
         backgroundColor: "#30363d",
         padding: "4vh",
         borderRadius: "8px",
@@ -171,6 +166,7 @@ const AuthForm = ({ name, displayName }) => {
                 required
                 variant="outlined"
                 type="text"
+                autoComplete="off"
                 sx={{
                   width: "100%",
                   border: "1px solid white",
@@ -188,6 +184,7 @@ const AuthForm = ({ name, displayName }) => {
                 required
                 variant="outlined"
                 type="email"
+                autoComplete="off"
                 sx={{
                   width: "100%",
                   border: "1px solid white",

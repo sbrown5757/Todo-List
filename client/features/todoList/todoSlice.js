@@ -5,7 +5,11 @@ export const fetchTodos = createAsyncThunk("/todos", async (id) => {
   const token = localStorage.getItem("token");
   try {
     if (token) {
-      const res = await axios.get(`/api/todos/${id}`);
+      const res = await axios.get(`/api/todos/${id}`, {
+        headers: {
+          authorization: token,
+        },
+      });
       return res.data;
     } else {
       return [];
@@ -19,7 +23,11 @@ export const fetchCompleted = createAsyncThunk("/completed", async (id) => {
   const token = localStorage.getItem("token");
   try {
     if (token) {
-      const res = await axios.get(`/api/todos/${id}/completed`);
+      const res = await axios.get(`/api/todos/${id}/completed`, {
+        headers: {
+          authorization: token,
+        },
+      });
       return res.data;
     } else {
       return [];

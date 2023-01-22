@@ -6,14 +6,18 @@ module.exports = router;
 
 router.get(`/:id`, async (req, res, next) => {
   try {
-    const todos = await Todo.findAll({
-      where: {
-        userId: req.params.id,
-        completed: false,
-      },
-      order: [["id", "ASC"]],
-    });
-    res.json(todos);
+    if (req.headers.authorization) {
+      const todos = await Todo.findAll({
+        where: {
+          userId: req.params.id,
+          completed: false,
+        },
+        order: [["id", "ASC"]],
+      });
+      res.json(todos);
+    } else {
+      res.json("Not Authorized");
+    }
   } catch (err) {
     next(err);
   }
@@ -21,14 +25,18 @@ router.get(`/:id`, async (req, res, next) => {
 
 router.get(`/:id/completed`, async (req, res, next) => {
   try {
-    const completed = await Todo.findAll({
-      where: {
-        userId: req.params.id,
-        completed: true,
-      },
-      order: [["id", "ASC"]],
-    });
-    res.json(completed);
+    if (req.headers.authorization) {
+      const completed = await Todo.findAll({
+        where: {
+          userId: req.params.id,
+          completed: true,
+        },
+        order: [["id", "ASC"]],
+      });
+      res.json(completed);
+    } else {
+      res.json("Not Authorized");
+    }
   } catch (err) {
     next(err);
   }
